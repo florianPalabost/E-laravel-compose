@@ -1,7 +1,9 @@
 DOCKER_COMPOSE := docker-compose
-PHP_EXEC := $(DOCKER_COMPOSE) exec -w /var/www/html php
+PHP_EXEC := $(DOCKER_COMPOSE) exec -w /var/www/html products-php
 WEB_EXEC := $(DOCKER_COMPOSE) exec -w /var/www/html web
 NPM_EXEC := $(WEB_EXEC) npm
+
+GATEWAY_EXEC := $(DOCKER_COMPOSE) exec -w /var/www/html gateway-app
 
 # for use args commands and be able to use args like make:controller
 # to use args like --unit use : " --unit"
@@ -11,6 +13,11 @@ COMMAND_ARGS := $(subst :,\:,$(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOAL
 ## help: 	help command
 help : Makefile
 	@sed -n 's/^##//p' $<
+
+## gateway: 		exec gateway-app container
+gateway:
+	@$(GATEWAY_EXEC) $(COMMAND_ARGS)
+
 
 ## install: 	Install project
 install:

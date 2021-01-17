@@ -40,5 +40,4 @@ COPY --chown=www-data:www-data . /var/www/html
 # Change current user to www
 USER www-data
 
-
 WORKDIR /var/www
