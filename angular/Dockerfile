@@ -1,12 +1,12 @@
-FROM nginx:latest AS build
+FROM node:12
 
+RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
-COPY ../../html/resources/frontend/angular/package.json ./
-RUN npm install
-COPY ../../html/resources/frontend/angular/* .
-RUN npm run build
-
-FROM nginx:latest
-COPY default.conf /etc/nginx/conf.d/default.conf
-COPY --from=build /usr/src/app/dist/angular /usr/share/nginx/html
-EXPOSE 80
+COPY package.json /usr/src/app
+COPY ./package-lock.json /usr/src/app
+RUN npm install --only-dev
+COPY . /usr/src/app
+RUN npm install -g @angular/cli
+RUN npm rebuild node-sass
+EXPOSE 4200
+CMD ["npm","start"]
