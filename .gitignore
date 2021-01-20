@@ -28,3 +28,9 @@ html/.editorconfig
 html/storage/debugbar/
 
 html/.env.testing
+
+angular/node_modules/
+
+gateway/vendor/
+
+orders/vendor/
