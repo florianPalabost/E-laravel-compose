@@ -2,37 +2,37 @@
 
 namespace App\Repository;
 
-use App\Product;
+use App\Category;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
-class ProductQueriesImpl implements Queries
+class CategoryQueriesImpl implements Queries
 {
-    public function retrieveById($id): Product
+    public function retrieveById($id): Category
     {
-        return Product::findOrFail($id);
+        return Category::findOrFail($id);
     }
 
-    public function retrieveByName(string $name): Product
+    public function retrieveByName(string $name): Category
     {
-       return Product::where('name', $name)->first();
+       return Category::where('name', $name)->first();
     }
 
     public function retrieveAll(): Collection|array
     {
-        return Product::all();
+        return Category::all();
     }
 
     public function save(array $all)
     {
-        return Product::create($all);
+        return Category::create($all);
     }
 
     public function update(array $input, int $id): int|string
     {
         try {
             if (!empty($id)) {
-                return Product::where('id', $id)->update($input);
+                return Category::where('id', $id)->update($input);
             }
             return 'id pass is empty';
         }
@@ -44,7 +44,7 @@ class ProductQueriesImpl implements Queries
     public function delete(int $id): int|string
     {
        try {
-            return Product::destroy($id);
+            return Category::destroy($id);
        }
        catch (ModelNotFoundException $e) {
             return $e->getMessage();

@@ -3,10 +3,10 @@
 namespace App\Services;
 
 use App\Product;
-use App\Repository\ProductQueries;
+use App\Repository\Queries;
 
 class ProductService {
-    public function __construct(private ProductQueries $productRepository)
+    public function __construct(private Queries $productRepository)
     {
 
     }

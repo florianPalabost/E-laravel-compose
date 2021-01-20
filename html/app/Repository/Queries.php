@@ -2,11 +2,12 @@
 
 namespace App\Repository;
 
+use App\Category;
 use App\Product;
 
-interface ProductQueries {
-    public function retrieveById($id): Product;
-    public function retrieveByName(string $name): Product;
+interface Queries {
+    public function retrieveById($id): Product|Category;
+    public function retrieveByName(string $name): Product|Category;
     public function retrieveAll();
 
     public function save(array $all);
