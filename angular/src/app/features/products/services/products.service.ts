@@ -20,8 +20,7 @@ export class ProductsService {
   public retrieveOne = (productId) => {
     if (typeof productId === "number") productId = productId.toString();
 
-    const params = new HttpParams().set('id', productId);
-    return this.http.get<Product>(this.urlService + 'products', {params});
+    return this.http.get<Product>(this.urlService + 'products/' + productId);
   }
 
   public add = (product: Product) => {

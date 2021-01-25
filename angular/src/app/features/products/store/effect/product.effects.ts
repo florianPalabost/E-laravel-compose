@@ -19,6 +19,18 @@ export class ProductEffects {
     )
   );
 
+  loadOneProduct$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(productActionTypes.loadOneProduct),
+      concatMap( (action) => {
+        return this.productService.retrieveOne(action.productId);
+      }),
+      map((doc: any) => {
+        return productActionTypes.oneProductLoaded({product: doc});
+      })
+    )
+  );
+
   createProduct$ = createEffect(() =>
     this.actions$.pipe(
       ofType(productActionTypes.addProduct),

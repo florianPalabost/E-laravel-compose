@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import {ProductsService} from "../services/products.service";
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Store} from "@ngrx/store";
 import {loadProducts} from "../store/action/product.actions";
 import {getAllProducts} from "../store/selector/product.selectors";
@@ -13,7 +12,7 @@ import {Product} from "../model/product";
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.scss']
 })
-export class ProductListComponent implements OnInit {
+export class ProductListComponent implements OnInit, OnDestroy {
   products: any;
   destroy$ = new Subject<boolean>();
 
@@ -27,6 +26,11 @@ export class ProductListComponent implements OnInit {
     ).subscribe((data: Product[]) => {
       this.products = data.length > 0 ? data : [];
     } )
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
   }
 
 }

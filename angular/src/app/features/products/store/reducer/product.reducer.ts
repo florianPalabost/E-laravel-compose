@@ -26,6 +26,9 @@ export const productReducer = createReducer(
       {...state, productsLoaded: true}
     );
   }),
+  on(productActionTypes.oneProductLoaded, (state, action) => {
+    return adapter.addOne(action.product, {...state, productsLoaded: true});
+  }),
   on(productActionTypes.addProduct, (state, action) => {
     return adapter.addOne(action.product, state);
   }),

@@ -15,6 +15,21 @@ export const productsFailedLoad = createAction(
 );
 
 
+export const loadOneProduct = createAction(
+  '[Product] Load one Product',
+  props<{productId: number}>()
+);
+export const oneProductLoaded = createAction(
+  '[Product Effect] One Product Loaded Successfully',
+  props<{product: Product}>()
+);
+export const oneProductFailedLoaded = createAction(
+  '[Product Effect] One Product Failed Loaded',
+  props<{error: any}>()
+);
+
+
+
 export const addProduct = createAction(
 '[Product] Add Product',
   props<{product: Product}>()
@@ -44,6 +59,9 @@ export const productActionTypes = {
   loadProducts,
   productsLoaded,
   productsFailedLoad,
+  loadOneProduct,
+  oneProductLoaded,
+  oneProductFailedLoaded,
   addProduct,
   deleteProduct,
   updateProduct,

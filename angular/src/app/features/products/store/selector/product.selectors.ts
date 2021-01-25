@@ -13,15 +13,19 @@ export const selectAllProducts = createSelector(
   selectAll
 );
 
+export const selectOneProduct = ({productId}) => createSelector(
+  selectAllProducts,
+  (products) => {
+    if (productId === undefined) {
+      return undefined;
+    }
+    return products.find((product) => product.id === productId);
+  }
+);
+
 export const areProductsLoaded = createSelector(
   productFeatureSelector,
   state => state.productsLoaded
 );
 
-// export const getProductsByColumn = ({columnTitle}) => createSelector(
-//   selectAllProducts,
-//   (products, props) => {
-//     // const res = products.length > 0 ? products.map((product) => product.column === columnTitle) : [];
-//     return products;
-//   }
-// );
+

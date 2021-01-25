@@ -10,6 +10,7 @@ import {StoreModule} from "@ngrx/store";
 import {EffectsModule} from "@ngrx/effects";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {ProductsService} from "./services/products.service";
+import {CommunModule} from "../commun/commun.module";
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import {ProductsService} from "./services/products.service";
     StoreModule.forFeature(productFeatureKey, productReducer),
     EffectsModule.forFeature([ProductEffects]),
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CommunModule
   ],
   providers: [ProductsService],
   exports: [ProductListComponent, ProductDetailComponent]

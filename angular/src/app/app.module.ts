@@ -17,6 +17,7 @@ import {environment} from "../environments/environment";
 import {StoreDevtoolsModule} from "@ngrx/store-devtools";
 import {ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
+import {CommunModule} from "./features/commun/commun.module";
 
 @NgModule({
   declarations: [
@@ -35,10 +36,16 @@ import {HttpClientModule} from "@angular/common/http";
     }),
     EffectsModule.forRoot([ProductEffects]),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
+    ReactiveFormsModule,
+    // add here features modules ...
+    CommunModule,
     ProductsModule,
-    ReactiveFormsModule
+
   ],
   providers: [],
+  exports: [
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
