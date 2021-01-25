@@ -1,0 +1,16 @@
+<div class="container">
+<div class="row">
+  <div class="col-12 col-sm-8 col-md-6 col-lg-8">
+<!--      todo slider image(s) of product-->
+    <app-carousel></app-carousel>
+  </div>
+
+  <div class="col-12 col-sm-4 col-md-6 col-lg-4">
+    <h1 *ngIf="product?.name">{{product?.name}}</h1>
+    <p class="prix euro" *ngIf="product?.price">{{product?.price}}</p>
+    <h3>Détails</h3>
+    <p class="text-justify" *ngIf="product?.description">{{product.description}}</p>
+    <button class="btn btn-outline-primary">Ajouter au panier</button>
+  </div>
+</div>
+</div>

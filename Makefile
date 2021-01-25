@@ -2,7 +2,7 @@ DOCKER_COMPOSE := docker-compose
 PHP_EXEC := $(DOCKER_COMPOSE) exec -w /var/www/html products-php
 WEB_EXEC := $(DOCKER_COMPOSE) exec -w /var/www/html web
 NPM_EXEC := $(WEB_EXEC) npm
-
+FRONT_EXEC := $(DOCKER_COMPOSE) exec -w /usr/src/app front
 GATEWAY_EXEC := $(DOCKER_COMPOSE) exec -w /var/www/html gateway-app
 
 # for use args commands and be able to use args like make:controller
@@ -17,7 +17,6 @@ help : Makefile
 ## gateway: 		exec gateway-app container
 gateway:
 	@$(GATEWAY_EXEC) $(COMMAND_ARGS)
-
 
 ## install: 	Install project
 install:
@@ -109,3 +108,7 @@ queue-retry:
 ## queue-start: 	Run queue with one try
 queue-start:
  	@$(PHP_EXEC) php artisan queue:work --tries 1
+
+## front: 	exec front/angular cmd pass as args
+front:
+	$(FRONT_EXEC) $(COMMAND_ARGS)
