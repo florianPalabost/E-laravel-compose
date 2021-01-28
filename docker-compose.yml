@@ -36,6 +36,33 @@ services:
       - ./gateway/nginx.conf:/etc/nginx/conf.d/default.conf
     links:
       - web
+      - users
+    networks:
+      - default
+
+  users:
+    container_name: users
+    build:
+      context: users
+    ports:
+      - 8081:8081
+    links:
+      - dbuser
+    environment:
+      NODE_ENV: development
+    volumes:
+      - ./users:/var/www/html
+    networks:
+      - default
+    restart: always
+
+  dbuser:
+    image: postgres:12
+    env_file: users/.env
+    ports:
+      - 54323:5432
+    volumes:
+      - dbuser-data:/var/lib/postgresql/data
     networks:
       - default
 
@@ -55,6 +82,7 @@ services:
 
 # html laravel folder
   products-php:
+    container_name: products-php
     build:
       context: .docker/php
       args:
@@ -114,12 +142,14 @@ services:
       - pgadmin-data:/var/lib/pgadmin
     links:
       - "db:pgsql-server"    
+      - "dbuser:pgsql-users-server"
       - "dbtest:test-pgsql-server"
     networks:
       - default
 
 volumes:
   db-data:
+  dbuser-data:
   db-data-testing:
   pgadmin-data:
 

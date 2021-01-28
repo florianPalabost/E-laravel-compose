@@ -3,6 +3,7 @@ PHP_EXEC := $(DOCKER_COMPOSE) exec -w /var/www/html products-php
 WEB_EXEC := $(DOCKER_COMPOSE) exec -w /var/www/html web
 NPM_EXEC := $(WEB_EXEC) npm
 FRONT_EXEC := $(DOCKER_COMPOSE) exec -w /usr/src/app front
+USERS_EXEC := $(DOCKER_COMPOSE) exec -w /var/www/html users
 GATEWAY_EXEC := $(DOCKER_COMPOSE) exec -w /var/www/html gateway-app
 
 # for use args commands and be able to use args like make:controller
@@ -112,3 +113,7 @@ queue-start:
 ## front: 	exec front/angular cmd pass as args
 front:
 	$(FRONT_EXEC) $(COMMAND_ARGS)
+
+## users: 	exec user cmd pass as args
+users-migrate:
+	@$(USERS_EXEC) sequelize db:migrate

@@ -34,3 +34,9 @@ angular/node_modules/
 gateway/vendor/
 
 orders/vendor/
+
+users/node_modules/
+
+users/dist/
+
+users/.env
