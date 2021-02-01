@@ -5,16 +5,22 @@ const getUsers = async (req, res) => {
     res.status(200).json(await UserService.getUsers());
 }
 
+
 const login = async (req: Request, res: Response) => {
     try {
-        const username = req.body.username;
+        const email = req.body.email;
         const password = req.body.password;
 
         // 401 -> unauthorized status
-        if (!username || !password) return res.status(401).send();
+        if (!email || !password) return res.status(401).send();
 
-        const {user, accessToken, refreshToken} = await UserService.login(username, password);
-        res.status(200).send({user, accessToken, refreshToken});
+        const user = await UserService.login(email, password);
+        if (user !== null && Object.keys(user).length > 0) {
+            res.status(200).send({user});
+        }
+        else {
+            res.status(401).send({message: 'No user with these credentials'});
+        }
     } catch (e) {
         console.log('[ERROR USER CONTROLLER] : ', e);
         res.status(500).send(e);
@@ -30,8 +36,8 @@ const register = async (req: Request, res: Response) => {
         lastname: req.body.lastname,
     };
     try {
-        const accessToken = await UserService.register(records);
-        res.status(201).json(accessToken);
+        const user = await UserService.register(records);
+        res.status(201).json(user);
     } catch (e) {
         res.status(500).json(e);
     }

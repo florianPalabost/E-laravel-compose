@@ -4,5 +4,7 @@
 /* Bootstrap v5 icons  */
 @import "~bootstrap-icons/font/bootstrap-icons.css";
 
+@import '~ngx-toastr/toastr';
+
 /* some properties/css which have to be available in global for site */
 @import 'assets/scss/global';

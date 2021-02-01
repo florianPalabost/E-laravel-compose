@@ -9,11 +9,13 @@ import { UserEffects } from './store/effect/user.effects';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {UserService} from "./services/user.service";
 import {ToggleDirective} from "./directives/toggle.directive";
+import {UserRoutingModule} from "./user-routing.module";
 
 @NgModule({
   declarations: [SigninComponent, SignupComponent, ToggleDirective],
   imports: [
     CommonModule,
+    UserRoutingModule,
     StoreModule.forFeature(userFeatureKey, userReducer),
     EffectsModule.forFeature([UserEffects]),
     FormsModule,

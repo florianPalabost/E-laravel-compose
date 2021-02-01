@@ -9,8 +9,8 @@
     <div [ngbCollapse]="isNavCollapsed" class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav">
         <li><a class="nav-link me-2" routerLink="/products">Products</a></li>
-        <li><a class="nav-link cursor-link" *ngIf="!isLogged" >Login</a></li>
-        <li><a class="nav-link cursor-link" *ngIf="!isLogged" >Register</a></li>
+        <li><a class="nav-link cursor-link" *ngIf="!isLogged" routerLink="users/login" >Login</a></li>
+        <li><a class="nav-link cursor-link" *ngIf="!isLogged" routerLink="users/register">Register</a></li>
         <li><a *ngIf="isLogged" class="nav-link cursor-link" (click)="logout()">Logout</a></li>
       </ul>
     </div>

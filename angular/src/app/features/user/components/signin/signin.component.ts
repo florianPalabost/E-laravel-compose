@@ -1,7 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
-import {ToastrService} from "ngx-toastr";
 import { Store } from '@ngrx/store';
 import {UserState} from "../../store/reducer/user.reducer";
 import {loadUser} from "../../store/action/user.actions";
@@ -22,14 +21,13 @@ export class SigninComponent implements OnInit, OnDestroy {
   user: User = new User({email: '', password: ''});
   destroy$: Subject<boolean> = new Subject<boolean>();
 
-  constructor(private toastr: ToastrService,
-              private formBuilder: FormBuilder,
+  constructor(private formBuilder: FormBuilder,
               private router:  Router, private store: Store<UserState>, private modalService: NgbModal) {
     this.store.select(fromRoot.getLoginUser).pipe(
       takeUntil(this.destroy$)
     ).subscribe(async data => {
       if (data.user['user'] && data.user['user'].hasOwnProperty('email') && data.user['user'].email) {
-        await this.router.navigate(['/jobs']);
+        await this.router.navigate(['/']);
       }
     });
 

@@ -28,6 +28,9 @@ export const userReducer = createReducer(
   on(userActionTypes.logoutUser, state => {
         return adapter.removeAll({...state, isLogged: false, user: null});
   }),
+  on(userActionTypes.addUserSuccess, (state, action) => {
+    return adapter.setOne(action.user, {...state, user:action.user, isLogged: true})
+  }),
 );
 
 export const getLoginUser = (state: UserState) => {

@@ -8,7 +8,7 @@ export const loadUser = createAction(
 
 export const loadUserSuccess = createAction(
   '[User] Load User Success',
-  props<{ user: any }>()
+  props<{ user: User }>()
 );
 
 export const loadUserFailure = createAction(
@@ -19,6 +19,11 @@ export const loadUserFailure = createAction(
 export const addUser = createAction(
   '[User] Add User',
   props<{user: User}>()
+);
+
+export const addUserSuccess = createAction(
+  '[User] Add User Success',
+  props<{ user: User }>()
 );
 
 export const logoutUser = createAction(
@@ -33,5 +38,6 @@ export const userActionTypes = {
   loadUserSuccess,
   loadUserFailure,
   addUser,
+  addUserSuccess,
   logoutUser,
 };

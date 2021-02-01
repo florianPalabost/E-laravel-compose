@@ -1,4 +1,4 @@
-import {DataTypes, Error} from "sequelize";
+import {DataTypes} from "sequelize";
 
 const jwt = require('jsonwebtoken');
 const db = require('../../db');
@@ -12,10 +12,10 @@ const getUsers = async () => {
     return await User.findAll();
 }
 
-const retrieveUserByUsername = async (username: string) => {
-    if (username === "" || username === null || username === undefined) return null;
+const retrieveUserByEmail = async (email: string) => {
+    if (email === "" || email === null || email === undefined) return null;
     try {
-        return await User.findOne({where: {username}});
+        return await User.findOne({where: {email}});
     } catch (e) {
         return e;
     }
@@ -26,23 +26,26 @@ const checkPassword = async (password: string, passwordRecorded: string) => {
     return await bcrypt.compare(password, passwordRecorded);
 };
 
-const login = async (username: string, password: string) => {
+const login = async (email: string, password: string) => {
 
     try {
         // retrieve user then check password
-        const user = await retrieveUserByUsername(username);
+        const user = await retrieveUserByEmail(email);
+
+        if (user === null) return {};
+
         const isPwdCorrect = await checkPassword(password, user.password);
 
         // todo generate password error to return
         if (!isPwdCorrect) return 'not found';
 
-        const payload = {username};
+        const payload = {email};
 
-        // generate tokens
-        const accessToken = generateToken(payload);
-        const refreshToken = generateToken(payload, true);
+        // generate tokens & use setDataValue() for custom props
+        user.setDataValue('accessToken', generateToken(payload));
+        user.setDataValue('refreshToken', generateToken(payload, true));
 
-        return {user, accessToken, refreshToken};
+        return user;
     } catch (e) {
         return e;
     }
@@ -52,8 +55,8 @@ const register = async (records) => {
     try {
         records.password = await bcrypt.hash(records.password, saltRounds);
         const user =  await User.create(records);
-        const accessToken = generateToken({user});
-        return {accessToken};
+        user.accessToken = generateToken({user});
+        return user;
     } catch (e) {
         return e;
     }
@@ -68,7 +71,7 @@ const generateToken = (payload, isRefreshToken = false) => {
 
 module.exports = {
     getUsers,
-    retrieveUserByUsername,
+    retrieveUserByEmail,
     checkPassword,
     login,
     register,

@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {userActionTypes} from "../action/user.actions";
-import {User} from "../../models/user";
+
 import {UserService} from "../../services/user.service";
 import {catchError, concatMap, map, mergeMap, switchMap, tap} from "rxjs/operators";
 import {Router} from "@angular/router";
 import * as storage from "../../../../root-store/storage";
 import {of} from "rxjs";
 import {ToastrService} from "ngx-toastr";
+import {User} from "../../models/user";
 
 @Injectable()
 export class UserEffects {
@@ -16,11 +17,15 @@ export class UserEffects {
     this.actions$.pipe(
       ofType(userActionTypes.loadUser),
       concatMap((action) => this.userService.signIn(action.user.email, action.user.password)),
-      map((action) => {
+      map((action:any) => {
+        console.log('action', action);
+          if (action.message) {
+            return userActionTypes.loadUserFailure({error: action.message});
+          }
           return userActionTypes.loadUserSuccess({user: new User(action.user)});
         }
       ),
-      catchError(err => of(userActionTypes.loadUserFailure({error: err}) ))
+      catchError(e =>  of(userActionTypes.loadUserFailure({error: e?.error?.message || e.message || e})))
     ),
   );
 
@@ -28,12 +33,13 @@ export class UserEffects {
       this.actions$.pipe(
         ofType(userActionTypes.loadUserSuccess),
         tap( () => {
-          this.router.navigate(['/jobs']).then(
+          this.router.navigate(['/']).then(
             () => this.toast.success('You have been successfully been connected !', 'Hello world!'));
         })
       ),
     { dispatch: false }
   );
+
 
   loadUserFail$ = createEffect(() =>
       this.actions$.pipe(
@@ -47,16 +53,25 @@ export class UserEffects {
   this.actions$.pipe(
     ofType(userActionTypes.addUser),
     concatMap((action) => this.userService.createUser(action.user)),
-    tap(() => this.router.navigateByUrl('/jobs').then(()=> this.toast.success('You have been successfully been registered !', 'Hello world!')))
-  ),
-    {dispatch: false}
+    map((action: any) => {
+      console.log(action.user);
+      return userActionTypes.addUserSuccess({user: action.user});
+    })
+  ));
+
+  addUserSuccess$ = createEffect(() =>
+      this.actions$.pipe(
+        ofType(userActionTypes.addUserSuccess),
+        tap( () => {
+          this.router.navigateByUrl('/').then(() => this.toast.success('You have been successfully been registered !', 'Hello world!'));
+        })
+      ),
+    { dispatch: false }
   );
 
   logoutUser$ = createEffect(() =>
     this.actions$.pipe(
       ofType(userActionTypes.logoutUser),
-      concatMap(() => this.userService.logout()),
-        catchError(err => of(err)),
       tap(() => {
           storage.clearStorage();
           return this.router.navigate(['/']);

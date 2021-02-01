@@ -15,7 +15,6 @@ export function clearState(reducer) {
     if (action.type === ActionTypes.logoutUser) {
       // to reset state
       // state = undefined;
-
       clearStorage();
 
       // emptyLocalStorage(['jobs', 'user']);
