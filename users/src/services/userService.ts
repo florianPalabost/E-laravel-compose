@@ -1,21 +1,20 @@
 import {DataTypes} from "sequelize";
 
 const jwt = require('jsonwebtoken');
-const db = require('../../db');
-const User = require('../models/user.model')(db.sequelize, DataTypes);
+const models = require('../models');
 const bcrypt = require('bcrypt');
 
 // hash() wants a number -> parsing
 const saltRounds = Number.parseInt(process.env.SALT_ROUNDS) || 13;
 
 const getUsers = async () => {
-    return await User.findAll();
+    return await models.User.findAll();
 }
 
 const retrieveUserByEmail = async (email: string) => {
     if (email === "" || email === null || email === undefined) return null;
     try {
-        return await User.findOne({where: {email}});
+        return await models.User.findOne({where: {email}});
     } catch (e) {
         return e;
     }
@@ -54,7 +53,9 @@ const login = async (email: string, password: string) => {
 const register = async (records) => {
     try {
         records.password = await bcrypt.hash(records.password, saltRounds);
-        const user =  await User.create(records);
+        const user =  await models.User.create(records, {
+            include: [ models.Role ]
+        });
         user.accessToken = generateToken({user});
         return user;
     } catch (e) {

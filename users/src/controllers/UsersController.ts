@@ -34,6 +34,7 @@ const register = async (req: Request, res: Response) => {
         email: req.body.email,
         firstname: req.body.firstname,
         lastname: req.body.lastname,
+        rolename: req.body.role
     };
     try {
         const user = await UserService.register(records);

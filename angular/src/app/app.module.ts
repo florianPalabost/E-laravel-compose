@@ -22,6 +22,7 @@ import {UserEffects} from "./features/user/store/effect/user.effects";
 import {UserModule} from "./features/user/user.module";
 import {ToastrModule} from "ngx-toastr";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {RolesModule} from "./features/roles/roles.module";
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     // add here features modules ...
     CommunModule,
     ProductsModule,
-    UserModule
+    UserModule,
+    RolesModule
   ],
   providers: [],
   exports: [

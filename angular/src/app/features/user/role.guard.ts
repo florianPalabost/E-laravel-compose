@@ -3,26 +3,27 @@ import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Route
 import { Observable } from 'rxjs';
 import {UserState} from "./store/reducer/user.reducer";
 import {Store} from "@ngrx/store";
-import {isUserLoaded} from "./store/selector/user.selectors";
+import {getLoggedInUser, isUserLoaded} from "./store/selector/user.selectors";
 import {map, tap} from "rxjs/operators";
 import {ToastrService} from "ngx-toastr";
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate {
+export class RoleGuard implements CanActivate {
 
   constructor(private store: Store<UserState>, private router: Router, private toast: ToastrService) { }
 
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return this.store.select(isUserLoaded).pipe(
-    map((userIsLogged) => {
-      if (!userIsLogged) {
-        this.router.navigate(['/users/login']).then(() => this.toast.warning('You should be connected to be here !') );
+    return this.store.select(getLoggedInUser).pipe(
+    map((data) => {
+      if (!data.isLogged || data.user.role !== 'ADMIN') {
+        this.router.navigate(['/users/login']).then(() => this.toast.warning('You should be connected & have the proper role to be here !') );
+        return false;
       }
-      return userIsLogged;
+      return data.isLogged;
     })
     );
   }

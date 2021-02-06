@@ -8,6 +8,7 @@ export class User {
     this.refreshToken = user.hasOwnProperty('refreshToken') ? user['refreshToken']:null;
     this.firstname = user.hasOwnProperty('firstname') ? user['firstname']:null;
     this.lastname = user.hasOwnProperty('lastname') ? user['lastname']:null;
+    this.role = user.hasOwnProperty('rolename') ? user['rolename']:null;
   }
 
   id?: string;
@@ -18,4 +19,5 @@ export class User {
   refreshToken?: string;
   firstname?: string;
   lastname?: string;
+  role?: any;
 }
