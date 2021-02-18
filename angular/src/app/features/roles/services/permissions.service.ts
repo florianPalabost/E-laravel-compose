@@ -29,12 +29,12 @@ export class PermissionService {
     return this.http.get<Permission>(this.urlService  + name);
   }
 
-  public add = (role: Permission) => {
-    return this.http.post<Permission>(this.urlService, role, this.HTTP_PARAMS);
+  public add = (permission: Permission) => {
+    return this.http.post<Permission>(this.urlService, permission, this.HTTP_PARAMS);
   }
 
-  public update = (role: Permission) => {
-    return this.http.put(this.urlService, role, this.HTTP_PARAMS);
+  public update = (permission: Permission) => {
+    return this.http.put(this.urlService, permission, this.HTTP_PARAMS);
   }
 
   public delete = (name: number) => {

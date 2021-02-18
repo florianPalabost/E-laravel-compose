@@ -1,0 +1,25 @@
+<div class="container p-4">
+  <div class="row ">
+    <h1>Ajouter une permission</h1>
+  </div>
+  <div class="row">
+    <form [formGroup]="formCreatePermission" (ngSubmit)="onSubmit()" >
+      <div class="form-group">
+        <label for="name" class="required">Nom</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          class="form-control w-50"
+          formControlName="name"
+          required
+        />
+        <small class="text-danger" *ngIf="formCreatePermission.get('name').hasError('required')">
+          Name is required !
+        </small>
+
+      </div>
+      <button [disabled]="formCreatePermission.invalid" class="btn btn-primary mt-5 mb-5" type="submit">Créer</button>
+    </form>
+  </div>
+</div>

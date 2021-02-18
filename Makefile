@@ -114,6 +114,12 @@ queue-start:
 front:
 	$(FRONT_EXEC) $(COMMAND_ARGS)
 
+users:
+	$(USERS_EXEC) $(COMMAND_ARGS)
 ## users: 	exec user cmd pass as args
 users-migrate:
 	@$(USERS_EXEC) sequelize db:migrate
+
+## users-sequelize: 	exec user cmd pass as args
+users-sequelize:
+	@$(USERS_EXEC) sequelize $(COMMAND_ARGS)

@@ -1,10 +1,13 @@
 <div class="container">
   <div class="row mt-5">
-    <div class="col-3">
+    <div class="col-2">
       <button class="btn btn-primary" routerLink="/roles/create"><span class="bi bi-plus">Rôle</span></button>
     </div>
+    <div class="col-2">
+      <button class="btn btn-primary" (click)="openCreatePermission()"><span class="bi bi-plus">Permission</span></button>
+    </div>
   </div>
-  <div class="row mt-5" *ngIf="roles !== undefined">
+  <div class="row mt-5 mb-5" *ngIf="roles !== undefined">
     <h1>Rôles</h1>
     <label for="selectRoles"> Permissions for : <select [name]="role" (change)="handlePermissions($event)" name="selectRoles" id="selectRoles" class="form-select">
       <option value="" disabled selected>Choose role</option>
@@ -13,7 +16,7 @@
     </label>
   </div>
 
-  <div class="row" *ngIf="permissions.length > 0">
+  <div class="row" *ngIf="permissions.length > 0 && role !== undefined">
     <table class="table">
       <thead>
         <tr><td>Permission</td><td>Allow</td></tr>
@@ -21,14 +24,14 @@
       <tbody>
       <tr *ngFor="let perm of permissions">
         <td>{{perm.name}}</td>
-        <td><input type="checkbox" [checked]="perm?.is_allowed === true"></td>
+        <td><input type="checkbox" (change)="toggleToSelectPerm($event, perm)" [checked]="perm?.is_allowed === true"></td>
       </tr>
       </tbody>
     </table>
   </div>
-  <div class="row">
+  <div class="row" *ngIf="role !== undefined" >
     <div class="col-2 mx-auto mb-5">
-      <button class="btn btn-primary"><span class="bi bi-save"></span> Save</button>
+      <button class="btn btn-primary"  [disabled]="isBtnDisabled " (click)="savePermissions()"><span class="bi bi-save"></span> Save</button>
     </div>
   </div>
 
