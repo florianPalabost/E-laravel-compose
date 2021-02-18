@@ -34,7 +34,7 @@ const register = async (req: Request, res: Response) => {
         email: req.body.email,
         firstname: req.body.firstname,
         lastname: req.body.lastname,
-        rolename: req.body.role
+        rolename: req.body.role || 'USER'
     };
     try {
         const user = await UserService.register(records);
@@ -45,8 +45,22 @@ const register = async (req: Request, res: Response) => {
 
 }
 
+const update = async (req: Request, res: Response) => {
+    const user = {...req.body};
+
+    try {
+        const isUpdated = await UserService.update(user);
+        res.json(isUpdated);
+    }
+    catch (e) {
+        console.log(e);
+        res.status(500).json(e);
+    }
+};
+
 module.exports = {
     login,
     register,
-    getUsers
+    getUsers,
+    update
 }

@@ -35,9 +35,9 @@ const create = async (records) => {
         for (let i=0; i<records.permissions.length; i++ ) {
             const perm = await PermissionService.retrievePermission(records.permissions[i].name);
             perm.is_allowed = true;
-            permissionToSet.push(perm)
+            permissionToSet.push(perm);
         }
-        console.log('permisisssssssssions:',permissionToSet);
+
         await role.setDataValue('permissions', permissionToSet);
         await role.setPermissions(permissionToSet, {through: {is_allowed: true}});
         await role.save();
@@ -53,6 +53,28 @@ const remove = async (name) => {
     }
     catch (e) {
         console.log(e);
+        return e;
+    }
+
+}
+
+const update = async (role) => {
+    try {
+        const roleDb = await retrieveRole(role.name);
+        // need to re-find permission in db to be able to set them to role ...
+        const permissionToSet = [];
+        for (let i=0; i<role.permissions.length; i++ ) {
+            const perm = await PermissionService.retrievePermission(role.permissions[i].name);
+            perm.is_allowed = true;
+            permissionToSet.push(perm);
+        }
+        const tata = await roleDb.setPermissions(permissionToSet, {through: {is_allowed: true}})
+        await roleDb.save();
+        return roleDb;
+    }
+    catch (e) {
+        console.log(e);
+        return e;
     }
 
 }
@@ -61,4 +83,5 @@ module.exports = {
     retrieveRole,
     create,
     remove,
+    update
 }

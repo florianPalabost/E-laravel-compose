@@ -70,11 +70,29 @@ const generateToken = (payload, isRefreshToken = false) => {
     });
 };
 
+const update = async (user) => {
+    try {
+        const [numberOfAffectedRows, affectedRows] = await models.User.update(user,
+            {
+                returning: true,
+                where: {id:user.id},
+                plain: true
+            });
+        return affectedRows;
+    }
+    catch (e) {
+        console.log(e);
+        return e;
+    }
+
+}
+
 module.exports = {
     getUsers,
     retrieveUserByEmail,
     checkPassword,
     login,
     register,
-    generateToken
+    generateToken,
+    update
 }
