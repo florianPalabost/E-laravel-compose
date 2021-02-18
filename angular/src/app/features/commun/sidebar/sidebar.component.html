@@ -1,0 +1,20 @@
+<!-- Sidebar -->
+<div class="bg-light border-right min-vh-100" id="sidebar-wrapper"
+     [ngClass]="{'hidden': hideSideNav }" *ngIf="hideSideNav">
+  <div class="sidebar-heading">Flo E-commerce</div>
+  <div class="list-group list-group-flush" *ngIf="isAdmin && logged">
+    <a routerLink="/admin" class="list-group-item list-group-item-action bg-light">Dashboard</a>
+    <a routerLink="/admin/products" class="list-group-item list-group-item-action bg-light">Products</a>
+    <a href="#" class="list-group-item list-group-item-action bg-light">Orders</a>
+    <a href="#" class="list-group-item list-group-item-action bg-light">Delivery</a>
+    <a href="#" class="list-group-item list-group-item-action bg-light">Users</a>
+    <a routerLink="/admin/roles" class="list-group-item list-group-item-action bg-light">Roles</a>
+  </div>
+
+
+  <div class="list-group list-group-flush" *ngIf="logged && !isAdmin">
+    <a routerLink="#" class="list-group-item list-group-item-action bg-light">Commandes</a>
+    <a routerLink="/users/settings" class="list-group-item list-group-item-action bg-light">Settings</a>
+    <a href="#" class="list-group-item list-group-item-action bg-light">Shortcuts</a>
+  </div>
+</div>

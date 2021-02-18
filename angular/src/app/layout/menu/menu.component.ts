@@ -15,6 +15,8 @@ import {takeUntil} from "rxjs/operators";
 })
 export class MenuComponent implements OnInit, OnDestroy {
   isLogged :boolean;
+  role: string;
+  user: any;
   destroy$: Subject<boolean> = new Subject<boolean>();
   isNavCollapsed = true;
 
@@ -22,6 +24,8 @@ export class MenuComponent implements OnInit, OnDestroy {
     this.store.select(fromRoot.getLoginUser).pipe(
       takeUntil(this.destroy$)
     ).subscribe(data => {
+      this.user = data?.user;
+      this.role = data?.user.hasOwnProperty('role') ? data?.user['role'] : null;
       this.isLogged = data?.user.hasOwnProperty('isLogged') ? data?.user['isLogged'] : false;
     });
   }
