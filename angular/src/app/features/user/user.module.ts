@@ -10,9 +10,13 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {UserService} from "./services/user.service";
 import {ToggleDirective} from "./directives/toggle.directive";
 import {UserRoutingModule} from "./user-routing.module";
+import { ProfileClientComponent } from './components/clients/profile-client/profile-client.component';
+import {CommunModule} from "../commun/commun.module";
+import { DashboardComponent } from './components/admin/dashboard/dashboard.component';
+import { SettingClientComponent } from './components/clients/setting-client/setting-client.component';
 
 @NgModule({
-  declarations: [SigninComponent, SignupComponent, ToggleDirective],
+  declarations: [SigninComponent, SignupComponent, ToggleDirective, ProfileClientComponent, DashboardComponent, SettingClientComponent],
   imports: [
     CommonModule,
     UserRoutingModule,
@@ -20,6 +24,7 @@ import {UserRoutingModule} from "./user-routing.module";
     EffectsModule.forFeature([UserEffects]),
     FormsModule,
     ReactiveFormsModule,
+    CommunModule,
   ],
   providers: [UserService],
   bootstrap: [],

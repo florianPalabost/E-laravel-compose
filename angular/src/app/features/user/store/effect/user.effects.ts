@@ -18,7 +18,6 @@ export class UserEffects {
       ofType(userActionTypes.loadUser),
       concatMap((action) => this.userService.signIn(action.user.email, action.user.password)),
       map((action:any) => {
-        console.log('action', action);
           if (action.message) {
             return userActionTypes.loadUserFailure({error: action.message});
           }
@@ -54,7 +53,6 @@ export class UserEffects {
     ofType(userActionTypes.addUser),
     concatMap((action) => this.userService.createUser(action.user)),
     map((action: any) => {
-      console.log(action.user);
       return userActionTypes.addUserSuccess({user: action.user});
     })
   ));
@@ -68,6 +66,16 @@ export class UserEffects {
       ),
     { dispatch: false }
   );
+
+  updateUser$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(userActionTypes.updateUser),
+      concatMap((action) => this.userService.updateUser(action.user.id ,action.user.changes)),
+      map((action: any) => {
+        this.toast.success('Info updated successfully !');
+        return userActionTypes.updateUserSuccess();
+      })
+    ));
 
   logoutUser$ = createEffect(() =>
     this.actions$.pipe(

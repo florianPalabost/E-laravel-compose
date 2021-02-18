@@ -26,10 +26,13 @@ export const userReducer = createReducer(
     return adapter.setOne(action.user, {...state, user:action.user, isLogged: true})
   }),
   on(userActionTypes.logoutUser, state => {
-        return adapter.removeAll({...state, isLogged: false, user: null});
+    return adapter.removeAll({...state, isLogged: false, user: null});
   }),
   on(userActionTypes.addUserSuccess, (state, action) => {
     return adapter.setOne(action.user, {...state, user:action.user, isLogged: true})
+  }),
+  on(userActionTypes.updateUser, (state, action) => {
+    return adapter.updateOne(action.user, {...state, user: action.user.changes});
   }),
 );
 

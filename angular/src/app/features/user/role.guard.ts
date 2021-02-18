@@ -19,6 +19,13 @@ export class RoleGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     return this.store.select(getLoggedInUser).pipe(
     map((data) => {
+      // not the right role
+      if (data.isLogged && data.user.role !== 'ADMIN') {
+        this.router.navigate(['/users/profile']);
+        return false;
+      }
+
+      // not logged
       if (!data.isLogged || data.user.role !== 'ADMIN') {
         this.router.navigate(['/users/login']).then(() => this.toast.warning('You should be connected & have the proper role to be here !') );
         return false;

@@ -46,4 +46,8 @@ export class UserService {
   getUser = () => {
     return this.store.pipe(select(fromRoot.getLoginUser))
   }
+
+  updateUser(userId, changes: Partial<User>): Observable<any> {
+    return this.http.put(this.URL_SERVICE + '/' + userId, changes);
+  }
 }

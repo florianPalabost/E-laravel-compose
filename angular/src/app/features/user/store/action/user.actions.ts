@@ -1,5 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import {User} from "../../models/user";
+import {Update} from "@ngrx/entity";
 
 export const loadUser = createAction(
   '[User] Load User',
@@ -26,12 +27,20 @@ export const addUserSuccess = createAction(
   props<{ user: User }>()
 );
 
+export const updateUser = createAction(
+  '[User] Update User',
+  props<{user: Update<User>}>()
+);
+
+export const updateUserSuccess = createAction(
+  '[User] Update User Success',
+  // props<{ user: User }>()
+);
+
 export const logoutUser = createAction(
   '[User] Logout User'
 );
 
-
-// todo adduser success failure
 
 export const userActionTypes = {
   loadUser,
@@ -40,4 +49,6 @@ export const userActionTypes = {
   addUser,
   addUserSuccess,
   logoutUser,
+  updateUser,
+  updateUserSuccess
 };
