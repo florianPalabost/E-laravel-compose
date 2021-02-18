@@ -16,8 +16,6 @@ export function clearState(reducer) {
       // to reset state
       // state = undefined;
       clearStorage();
-
-      // emptyLocalStorage(['jobs', 'user']);
     }
 
     return reducer(state, action);

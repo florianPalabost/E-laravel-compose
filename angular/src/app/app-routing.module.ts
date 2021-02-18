@@ -15,11 +15,13 @@ const routes: Routes = [
     path: 'users',
     loadChildren: () => import('./features/user/user.module').then(m => m.UserModule)
   },
+
   {
-    path: 'roles',
-    loadChildren: () => import('./features/roles/roles.module').then(m => m.RolesModule)
+    path: 'admin',
+    loadChildren: () => import('./features/admin/admin.module').then(m => m.AdminModule),
   }
 ];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })],

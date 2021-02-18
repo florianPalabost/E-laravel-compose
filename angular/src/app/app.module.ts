@@ -23,6 +23,7 @@ import {UserModule} from "./features/user/user.module";
 import {ToastrModule} from "ngx-toastr";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {RolesModule} from "./features/roles/roles.module";
+import {AdminModule} from "./features/admin/admin.module";
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import {RolesModule} from "./features/roles/roles.module";
     CommunModule,
     ProductsModule,
     UserModule,
+    AdminModule,
     RolesModule
   ],
   providers: [],

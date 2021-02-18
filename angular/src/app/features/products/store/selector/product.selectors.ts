@@ -14,8 +14,9 @@ export const selectAllProducts = createSelector(
 );
 
 export const selectOneProduct = ({productId}) => createSelector(
-  selectAllProducts,
+  getAllProducts,
   (products) => {
+    console.log(products);
     if (productId === undefined) {
       return undefined;
     }
