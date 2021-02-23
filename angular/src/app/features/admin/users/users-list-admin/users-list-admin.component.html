@@ -1,0 +1,38 @@
+<div class="container">
+
+  <div class="d-flex justify-content-end mb-3">
+    <div class="col-9">
+      <h1 class="h1">Liste des utilisateurs</h1>
+    </div>
+    <div class="col-3">
+      <button routerLink="/admin/users/create" class="btn btn-primary"><span class="bi bi-plus"></span>User</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <table class="table">
+        <thead>
+        <tr>
+          <td>Id</td>
+          <td>Email</td>
+          <td>Username</td>
+          <td>Rôle</td>
+          <td>Actions</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let user of users">
+          <td>{{user.id}}</td>
+          <td>{{user.email}}</td>
+          <td><a [routerLink]="['/users', user.id]">{{user.username}}</a></td>
+          <td>{{user.rolename || 'NO ROLE ASSIGNED'}}</td>
+          <td>
+            <button class="btn btn-outline-0" ngbTooltip="Edit" [routerLink]="['/admin/users/edit',user.id]"><span class="bi bi-pen color-pen"></span></button>
+            <button class="btn btn-outline-0" ngbTooltip="Delete" (click)="remove(user.id)"><span class="bi bi-trash color-trash"></span></button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

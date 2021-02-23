@@ -1,0 +1,71 @@
+<div class="row text-dark">
+  <div class="col-10 col-md-8 col-lg-6 mx-auto mt-5">
+    <h1>Créer un utilisateur</h1>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <p class="font-italic"><span class="required"></span> required field</p>
+      <div class="form-group mt-3">
+        <div class="input-group">
+          <input type="text" formControlName="email" class="form-control" id="email" placeholder="mail address">
+          <div class="input-group-append">
+            <span class="input-group-text">
+              <i class="bi bi-envelope"></i>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group mt-3">
+        <select class="form-select" aria-label="select role" formControlName="role">
+          <option selected>Choose role</option>
+          <option *ngFor="let role of roles" [value]="role.name">{{role.name}}</option>
+        </select>
+      </div>
+
+      <div class="form-group mt-3">
+        <div class="input-group">
+          <input type="password" formControlName="password" class="form-control password" id="password" placeholder="password">
+          <div class="input-group-append">
+           <span class="input-group-text required" toggle>
+             <i class="bi bi-eye-slash"></i>
+           </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group mt-3">
+        <div class="input-group">
+          <input type="text" formControlName="username" class="form-control" id="username" placeholder="username">
+          <div class="input-group-append">
+            <span class="input-group-text required">
+              <i class="bi bi-person"></i>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group mt-3">
+        <div class="input-group">
+          <input type="text" formControlName="firstname" class="form-control" id="firstname" placeholder="firstname">
+          <div class="input-group-append">
+            <span class="input-group-text">
+              <i class="bi bi-person"></i>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group mt-3">
+        <div class="input-group">
+          <input type="text" formControlName="lastname" class="form-control" id="lastname" placeholder="lastname">
+          <div class="input-group-append">
+            <span class="input-group-text">
+              <i class="bi bi-person"></i>
+            </span>
+          </div>
+        </div>
+      </div>
+      <button class="btn btn-outline-primary mt-5" type="submit" [disabled]="registerForm.invalid">Créer le compte</button>
+    </form>
+    <p class="text-danger"> {{errMsg}}</p>
+  </div>
+</div>

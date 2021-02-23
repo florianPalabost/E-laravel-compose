@@ -37,6 +37,7 @@ export const updateUserSuccess = createAction(
   // props<{ user: User }>()
 );
 
+
 export const logoutUser = createAction(
   '[User] Logout User'
 );
@@ -50,5 +51,5 @@ export const userActionTypes = {
   addUserSuccess,
   logoutUser,
   updateUser,
-  updateUserSuccess
+  updateUserSuccess,
 };

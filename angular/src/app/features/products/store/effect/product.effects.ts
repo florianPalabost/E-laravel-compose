@@ -36,7 +36,10 @@ export class ProductEffects {
     this.actions$.pipe(
       ofType(productActionTypes.addProduct),
       concatMap((action) => this.productService.add(action.product)),
-      // tap(() => this.router.navigateByUrl('/products'))
+      tap(() => {
+        this.toast.success('Product added successfully !');
+        this.router.navigateByUrl('/admin/products');
+      })
     ),
   {dispatch: false}
   );

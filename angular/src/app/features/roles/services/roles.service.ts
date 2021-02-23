@@ -25,7 +25,6 @@ export class RolesService {
   }
 
   public retrieveOne = (name: string) => {
-
     return this.http.get<Role>(this.urlService  + name);
   }
 

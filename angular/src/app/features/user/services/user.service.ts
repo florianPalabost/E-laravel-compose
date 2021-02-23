@@ -16,6 +16,10 @@ export class UserService {
 
   constructor(private http: HttpClient, private store: Store<UserState>) { }
 
+  retrieveUsers = () => {
+    return this.http.get(this.URL_SERVICE);
+  }
+
   /**
    * @param email
    * @param password
@@ -49,5 +53,9 @@ export class UserService {
 
   updateUser(userId, changes: Partial<User>): Observable<any> {
     return this.http.put(this.URL_SERVICE + '/' + userId, changes);
+  }
+
+  deleteUser(userId: string) {
+    return this.http.delete(this.URL_SERVICE + '/' + userId);
   }
 }

@@ -32,11 +32,6 @@ export class ProductListAdminComponent implements OnInit, OnDestroy {
       // sort products by id
       this.products.sort((a,b) => a.id - b.id);
     } );
-    // design render
-
-    // action edit & delete
-
-    // do users part : list user CRUD with role
   }
 
   edit(product: Product) {

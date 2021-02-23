@@ -31,7 +31,7 @@
         <div class="form-group mt-3">
           <label for="description">Description</label>
           <textarea class="form-control" id="description" formControlName="description" rows="5"></textarea>
-          <small class="text-danger" *ngIf="editProductForm.get('stock').hasError('required')">
+          <small class="text-danger" *ngIf="editProductForm.get('description').hasError('required')">
             Stock is required !
           </small>
         </div>

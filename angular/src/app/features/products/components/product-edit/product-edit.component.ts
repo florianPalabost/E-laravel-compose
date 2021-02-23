@@ -63,7 +63,10 @@ export class ProductEditComponent implements OnInit, OnDestroy {
         ...this.editProductForm.value
       }
     };
+    delete product.changes["created_at"];
+    delete product.changes["updated_at"];
 
+    // console.log(product);
     this.store.dispatch(updateProduct({product}));
   }
 

@@ -14,9 +14,11 @@ import { ProfileClientComponent } from './components/clients/profile-client/prof
 import {CommunModule} from "../commun/commun.module";
 import { DashboardComponent } from './components/admin/dashboard/dashboard.component';
 import { SettingClientComponent } from './components/clients/setting-client/setting-client.component';
+import { CreateUserComponent } from './components/admin/create-user/create-user.component';
+import { EditUserComponent } from './components/admin/edit-user/edit-user.component';
 
 @NgModule({
-  declarations: [SigninComponent, SignupComponent, ToggleDirective, ProfileClientComponent, DashboardComponent, SettingClientComponent],
+  declarations: [SigninComponent, SignupComponent, ToggleDirective, ProfileClientComponent, DashboardComponent, SettingClientComponent, CreateUserComponent, EditUserComponent],
   imports: [
     CommonModule,
     UserRoutingModule,

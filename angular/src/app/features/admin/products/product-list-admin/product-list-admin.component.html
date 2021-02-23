@@ -1,7 +1,9 @@
 <div class="container">
-  <h1>Liste des produits</h1>
 
-  <div class="row mb-3">
+  <div class="d-flex justify-content-end mb-3">
+    <div class="col-9">
+      <h1 class="h1">Liste des produits</h1>
+    </div>
     <div class="col-3">
       <button routerLink="/admin/products/create" class="btn btn-primary"><span class="bi bi-plus"></span>Produit</button>
     </div>
@@ -30,8 +32,8 @@
           <td>{{product.id}}</td>
           <td><a [routerLink]="['/products', product.id]"><img src="https://via.placeholder.com/150" alt="picture-product"></a></td>
           <td><a [routerLink]="['/products', product.id]">{{product.name}}</a></td>
-          <td *ngIf="product.stock >= 10"><span class="badge bg-success">En stock</span></td>
-          <td *ngIf="product.stock > 0 && product.stock < 10"><span class="badge bg-warning" >En stock</span></td>
+          <td *ngIf="product.stock > 10"><span class="badge bg-success">En stock</span></td>
+          <td *ngIf="product.stock > 0 && product.stock <= 10"><span class="badge bg-warning" >En stock</span></td>
           <td *ngIf="product.stock <= 0"><span class="badge bg-danger" >Indisponible</span></td>
           <td>{{product.price}}</td>
           <td>Cat todo</td>
