@@ -1,5 +1,4 @@
 import {Model, Sequelize} from 'sequelize-typescript';
-import {User} from "../angular/src/app/features/user/models/user";
 
 const sequelize = new Sequelize({
     dialect: 'postgres',
@@ -8,22 +7,20 @@ const sequelize = new Sequelize({
     password: process.env.POSTGRES_PASSWORD,
     database: process.env.POSTGRES_DB,
     port: Number.parseInt(process.env.POSTGRES_PORT, 10),
-    models: [__dirname + '/models/*.model.ts'],
-    modelMatch: (filename, member) => {
-        return filename.substring(0, filename.indexOf('.model')) === member.toLowerCase();
-    },
     define: {
         freezeTableName: true,
         timestamps: true,
     },
-    // psool: {
+    // poodl: {
     //     max: 10,
     //     min: 0,
     //     idle: 10 * 1000,
     // },
 });
-
-sequelize.addModels(['models/user.model']);
-
+sequelize.addModels([
+    'src/models/role.model',
+    'src/models/user.model',
+    'src/models/permission.model'
+]);
 
 export { sequelize };

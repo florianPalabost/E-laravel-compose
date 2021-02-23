@@ -41,7 +41,7 @@
         </div>
     </div>
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/app.ts') }}"></script>
     @stack('script')
 </body>
 </html>

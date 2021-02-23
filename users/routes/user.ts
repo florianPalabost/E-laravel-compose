@@ -7,6 +7,10 @@ router.post('/login', (req, res) => UsersController.login(req, res));
 
 router.post('/register', (req, res, next) => UsersController.register(req, res));
 
+router.put('/:id', (req, res, next) => UsersController.update(req, res));
+
+router.delete('/:id', (req, res, next) => UsersController.remove(req, res));
+
 router.get('/', (req, res) => UsersController.getUsers(req, res));
 
 module.exports = router;

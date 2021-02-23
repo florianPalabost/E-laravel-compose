@@ -1,12 +1,12 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, ParamMap} from "@angular/router";
-import {ProductState} from "../store/reducer/product.reducer";
+import {ProductState} from "../../store/reducer/product.reducer";
 import {Store} from "@ngrx/store";
-import {selectOneProduct} from "../store/selector/product.selectors";
+import {selectOneProduct} from "../../store/selector/product.selectors";
 import {takeUntil} from "rxjs/operators";
 import {Subject} from "rxjs";
-import {loadOneProduct} from "../store/action/product.actions";
-import {Product} from "../model/product";
+import {loadOneProduct} from "../../store/action/product.actions";
+import {Product} from "../../model/product";
 
 @Component({
   selector: 'app-product-detail',

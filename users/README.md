@@ -8,6 +8,9 @@
 - Postgres
 - JWT
 
-## Routes 
-- POST /users/login -> login user
-- POST /users/register -> register user
+## Routes
+- /users
+    - POST /users/login -> login user
+    - POST /users/register -> register user
+- /roles
+    

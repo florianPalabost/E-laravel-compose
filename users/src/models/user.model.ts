@@ -6,6 +6,11 @@ module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     static associate(models) {
       // define association here
+      User.belongsTo(models.Role, {
+        foreignKey: 'rolename',
+        onDelete: 'CASCADE',
+        onUpdate: 'SET NULL',
+      });
     }
   }
   User.init({
@@ -14,7 +19,9 @@ module.exports = (sequelize, DataTypes) => {
     firstname: DataTypes.STRING,
     lastname: DataTypes.STRING,
     email: DataTypes.STRING,
+    rolename: DataTypes.STRING
   }, {
+    underscored: true,
     sequelize: sequelize,
     modelName: 'User',
     tableName: 'users'

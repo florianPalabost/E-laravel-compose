@@ -20,7 +20,7 @@ export class AuthGuard implements CanActivate {
     return this.store.select(isUserLoaded).pipe(
     map((userIsLogged) => {
       if (!userIsLogged) {
-        this.router.navigate(['/login']).then(() => this.toast.info('You should be connected to be here !') );
+        this.router.navigate(['/users/login']).then(() => this.toast.warning('You should be connected to be here !') );
       }
       return userIsLogged;
     })

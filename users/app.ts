@@ -6,9 +6,11 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const cors = require("cors");
 const app = express();
-const userRoutes = require('./routes/user');
 const port = process.env.PORT || 8081;
 const db = require('./db');
+const userRoutes = require('./routes/user');
+const rolesRoutes = require('./routes/role');
+const permissionsRoutes = require('./routes/permission');
 
 db.sequelize
     .authenticate()
@@ -19,13 +21,16 @@ db.sequelize
         console.error('Unable to connect to the database:', err);
     });
 
-db.sequelize.sync({ force: true }).then(() => {
+db.sequelize.sync({ force: true }).then(async () => {
     console.log("Drop and re-sync db.");
+    await db.sequelize.query(`INSERT INTO roles (name) VALUES ('ADMIN')`, { type: db.sequelize.QueryTypes.INSERT });
+    await db.sequelize.query("INSERT INTO permissions (name) VALUES ('READ PERMISSION')", { type: db.sequelize.QueryTypes.INSERT });
+    await db.sequelize.query("INSERT INTO roles_permissions (name_role, name_permission, is_allowed) VALUES ('ADMIN', 'READ PERMISSION', true)", { type: db.sequelize.QueryTypes.INSERT });
 });
 
 // handle cors
 const corsOptions = {
-    origin: "http://localhost:8888"
+    origin: "*"
 };
 app.use(cors(corsOptions));
 
@@ -39,7 +44,9 @@ app.use(compression());
 
 // routing
 app.use('/users', userRoutes);
+app.use('/roles', rolesRoutes);
+app.use('/permissions', permissionsRoutes);
 
 app.listen(port, () => {
-    console.log('Run on port : ', port);
+    console.log('Running on port : ', port);
 });

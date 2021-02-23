@@ -1,0 +1,22 @@
+<div class="row">
+  <h1>Dashboard</h1>
+  <div class="col-6">
+    <table class="table">
+      <caption class="text-center">Best sellers products</caption>
+      <thead>
+      <tr>
+        <td>id</td>
+        <td>Product Name</td>
+        <td>Number sell</td>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let product of products">
+        <td>{{product.id}}</td>
+        <td>{{product.name}}</td>
+        <td>{{product.sells}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

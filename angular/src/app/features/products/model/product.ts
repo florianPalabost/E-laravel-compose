@@ -4,4 +4,5 @@ export class Product {
   price: string;
   description?: string;
   category_id?: string;
+  stock?: number;
 }

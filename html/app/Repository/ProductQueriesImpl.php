@@ -28,13 +28,13 @@ class ProductQueriesImpl implements Queries
         return Product::create($all);
     }
 
-    public function update(array $input, int $id): int|string
+    public function update(array $input, int $id): int|string|\Exception
     {
         try {
             if (!empty($id)) {
                 return Product::where('id', $id)->update($input);
             }
-            return 'id pass is empty';
+            throw  new \Exception('[Update_product]:::: id pass is empty!');
         }
         catch (ModelNotFoundException $e) {
             return $e->getMessage();

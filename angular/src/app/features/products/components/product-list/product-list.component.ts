@@ -1,11 +1,11 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Store} from "@ngrx/store";
-import {loadProducts} from "../store/action/product.actions";
-import {getAllProducts} from "../store/selector/product.selectors";
+import {loadProducts} from "../../store/action/product.actions";
+import {getAllProducts} from "../../store/selector/product.selectors";
 import {takeUntil} from "rxjs/operators";
 import {Subject} from "rxjs";
-import {ProductState} from "../store/reducer/product.reducer";
-import {Product} from "../model/product";
+import {ProductState} from "../../store/reducer/product.reducer";
+import {Product} from "../../model/product";
 
 @Component({
   selector: 'app-product-list',

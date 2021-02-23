@@ -1,0 +1,49 @@
+<div class="container">
+
+  <div class="d-flex justify-content-end mb-3">
+    <div class="col-9">
+      <h1 class="h1">Liste des produits</h1>
+    </div>
+    <div class="col-3">
+      <button routerLink="/admin/products/create" class="btn btn-primary"><span class="bi bi-plus"></span>Produit</button>
+    </div>
+  </div>
+  <small>
+    <span class="badge bg-success">Stock > 10</span>
+    <span class="badge bg-warning ms-1">Stock <= 10</span>
+    <span class="badge bg-danger ms-1">Hors stock</span>
+  </small>
+  <div class="row">
+    <div class="col-12">
+      <table class="table">
+        <thead>
+        <tr>
+          <td>Id</td>
+          <td>Photo</td>
+          <td>Nom</td>
+          <td>Stock</td>
+          <td>Prix</td>
+          <td>Catégorie(s)</td>
+          <td>Actions</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let product of products">
+          <td>{{product.id}}</td>
+          <td><a [routerLink]="['/products', product.id]"><img src="https://via.placeholder.com/150" alt="picture-product"></a></td>
+          <td><a [routerLink]="['/products', product.id]">{{product.name}}</a></td>
+          <td *ngIf="product.stock > 10"><span class="badge bg-success">En stock</span></td>
+          <td *ngIf="product.stock > 0 && product.stock <= 10"><span class="badge bg-warning" >En stock</span></td>
+          <td *ngIf="product.stock <= 0"><span class="badge bg-danger" >Indisponible</span></td>
+          <td>{{product.price}}</td>
+          <td>Cat todo</td>
+          <td>
+            <button class="btn btn-outline-0" ngbTooltip="Edit" [routerLink]="['/admin/products/edit',product.id]"><span class="bi bi-pen color-pen"></span></button>
+            <button class="btn btn-outline-0" ngbTooltip="Delete" (click)="remove(product.id)"><span class="bi bi-trash color-trash"></span></button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

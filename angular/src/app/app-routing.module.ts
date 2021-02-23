@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {HomeComponent} from "./layout/home/home.component";
 
-
 const routes: Routes = [
   {
     path: '',
@@ -11,8 +10,18 @@ const routes: Routes = [
   {
     path: 'products',
     loadChildren: () => import('./features/products/products.module').then(m => m.ProductsModule)
+  },
+  {
+    path: 'users',
+    loadChildren: () => import('./features/user/user.module').then(m => m.UserModule)
+  },
+
+  {
+    path: 'admin',
+    loadChildren: () => import('./features/admin/admin.module').then(m => m.AdminModule),
   }
 ];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })],

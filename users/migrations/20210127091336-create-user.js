@@ -1,5 +1,4 @@
 'use strict';
-import {DataTypes} from "sequelize";
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
@@ -8,34 +7,39 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: DataTypes.INTEGER
+        type: Sequelize.INTEGER
       },
       username: {
-        type: new DataTypes.STRING(128),
+        type: new Sequelize.STRING(128),
         allowNull: false,
       },
       password: {
-        type: new DataTypes.STRING(128),
+        type: new Sequelize.STRING(128),
         allowNull: false,
       },
       firstname: {
-        type: new DataTypes.STRING(128),
+        type: new Sequelize.STRING(128),
         allowNull: true,
       },
       lastname: {
-        type: new DataTypes.STRING(128),
+        type: new Sequelize.STRING(128),
         allowNull: true,
       },
       email: {
-        type: DataTypes.STRING
+        type: Sequelize.STRING
+      },
+      rolename: {
+        type: Sequelize.STRING
       },
       createdAt: {
+        field: 'created_at',
         allowNull: false,
-        type: DataTypes.DATE
+        type: Sequelize.DATE
       },
       updatedAt: {
+        field: 'updated_at',
         allowNull: false,
-        type: DataTypes.DATE
+        type: Sequelize.DATE
       }
     });
   },
