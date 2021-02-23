@@ -47,7 +47,6 @@ const register = async (req: Request, res: Response) => {
 
 const update = async (req: Request, res: Response) => {
     const user = {...req.body};
-
     try {
         const isUpdated = await UserService.update(user);
         res.json(isUpdated);
@@ -58,9 +57,23 @@ const update = async (req: Request, res: Response) => {
     }
 };
 
+const remove = async (req: Request, res: Response ) => {
+  const userId = req.params.id;
+
+  try {
+      const isDeleted = await UserService.remove(userId);
+      res.json(isDeleted);
+  }
+  catch (e) {
+      console.log(e);
+      res.status(500).json(e);
+  }
+};
+
 module.exports = {
     login,
     register,
     getUsers,
-    update
+    update,
+    remove
 }

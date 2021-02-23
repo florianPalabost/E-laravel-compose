@@ -87,6 +87,19 @@ const update = async (user) => {
 
 }
 
+const remove = async (userId) => {
+  try {
+      return await models.User.destroy({
+          where: {
+              id: userId
+          }
+      });
+  }
+  catch (e) {
+      return e;
+  }
+};
+
 module.exports = {
     getUsers,
     retrieveUserByEmail,
@@ -94,5 +107,6 @@ module.exports = {
     login,
     register,
     generateToken,
-    update
+    update,
+    remove
 }
