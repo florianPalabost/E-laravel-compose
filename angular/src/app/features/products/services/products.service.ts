@@ -13,9 +13,10 @@ export class ProductsService {
 
   private HTTP_PARAMS = {
     headers: new HttpHeaders({
+      // 'Content-Type':  'application/x-www-form-urlencoded',
       'Content-Type':  'application/json',
-      // 'Access-Control-Allow-Headers': 'Content-Type, Access-Control-Allow-Headers, Access-Control-Allow-Origin, Authorization, X-Requested-With',
-      // 'Access-Control-Allow-Credentials' : 'true',
+      'Access-Control-Allow-Headers': 'Content-Type, Access-Control-Allow-Headers, Access-Control-Allow-Origin, Authorization, X-Requested-With',
+      'Access-Control-Allow-Credentials' : 'true',
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Methods': 'GET, POST, PATCH, DELETE, PUT, OPTIONS',
     })};
@@ -38,7 +39,7 @@ export class ProductsService {
   }
 
   public update = (productId, changes: Partial<Product>): Observable<any> => {
-    return this.http.put(this.urlService + '/' + productId, changes);
+    return this.http.put(this.urlService + '/' + productId, changes, this.HTTP_PARAMS);
   }
 
   public delete = (productId) => {
