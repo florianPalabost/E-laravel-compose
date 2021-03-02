@@ -1,34 +1,38 @@
-# Laravel + Docker + PHP 7.3 (with composer) + PostgreSQL starter pack
+# E-commerce website in micro-services
 
-Use a starter pack to start developing apps using [Laravel](https://laravel.com/) in just a few minutes.
-
-**Starter pack includes:**
+## Technologies
 * nginx
-* PHP 7.3
+* PHP 8.0
 * Composer
 * PostgreSQL 12
 * Laravel starter code
 * pgAdmin 4.27
-* redis
+* Express, nodeJS
+* Sequelize ORM
 
-# Getting started
+## Architecture
+![archi](maquettes/archi.png)
 
-## Prerequisites
+## Getting started
+### Prerequisites
 
-Having `docker` and `docker-compose` installed.
+Having `docker`, `docker-compose`, `make` installed.
 
-## Installation
+### Installation
 
 1. Clone the project and bring the containers up:
     ```bash
     git clone <URL_REP> ./
-    ./start.sh
+    make start
     ```
 1. install composer packages:
     ```bash
+    # sans Makefile
     docker-compose exec -w /var/www/html php composer install
+   # avec Makefile
+   make install
     ```
-1. Navigate to [http://localhost:8080](http://localhost:8080)
+1. Navigate to [http://localhost:4200](http://localhost:4200)
 4. Done!
 
 ## Connecting to Postgres
@@ -43,7 +47,15 @@ To connect from the host machine use `localhost` as the host name and port `5432
 ## Running `artisan` commands (ex. migrations)
 
 ```bash
+ # sans Makefile
 docker-compose exec -w /var/www/html php php artisan <command>
+ # avec Makefile
+ make pa " <command>"
+```
+
+# Help
+```bash
+make help
 ```
 
 # License
