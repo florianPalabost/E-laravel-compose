@@ -1,6 +1,6 @@
 import {Product} from "../../products/model/product";
 
-export class Basket {
+export class Cart {
   id: number;
   products: Product[];
 }

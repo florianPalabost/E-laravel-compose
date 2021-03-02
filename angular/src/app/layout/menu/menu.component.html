@@ -13,6 +13,11 @@
         <li><a class="nav-link cursor-link" *ngIf="!isLogged" routerLink="users/register">Register</a></li>
       </ul>
     </div>
+
+    <a class="btn me-5" role="button" routerLink="/cart">
+      <span class="bi bi-cart"></span>
+    </a>
+
     <div class="dropdown show me-5" *ngIf="user && isLogged">
       <!-- Toggle -->
       <a href="#"  [class]="isLogged ? 'avatar-online' : 'avatar-offline'" class="avatar avatar-sm dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -27,6 +32,7 @@
         <hr class="dropdown-divider">
         <a (click)="logout()" class="dropdown-item text-center text-danger" style="cursor: pointer" >Logout</a>
       </ul>
+
     </div>
 
   </div>

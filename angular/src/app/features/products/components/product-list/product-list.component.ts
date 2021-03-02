@@ -6,6 +6,7 @@ import {takeUntil} from "rxjs/operators";
 import {Subject} from "rxjs";
 import {ProductState} from "../../store/reducer/product.reducer";
 import {Product} from "../../model/product";
+import {addProductToCart} from "../../../cart/store/action/cart.actions";
 
 @Component({
   selector: 'app-product-list',
@@ -33,4 +34,9 @@ export class ProductListComponent implements OnInit, OnDestroy {
     this.destroy$.unsubscribe();
   }
 
+  addToBasket(product: any) {
+    console.log(product);
+    this.store.dispatch(addProductToCart({product}));
+    // todo add feedback here or in effect
+  }
 }

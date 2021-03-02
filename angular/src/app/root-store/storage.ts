@@ -48,7 +48,7 @@ export const emptyLocalStorage = (reducerkeys) => {
       })
     }
   }catch(err){
-    //console.log("ERROR===emptyLocalStorage==>>>")
+    console.log('[localStorage]', err);
   }
 }
 

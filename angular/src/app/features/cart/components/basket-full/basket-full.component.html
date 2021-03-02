@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="row mt-5">
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-warning">Passer commande</button>
+    </div>
+   <div class="row" *ngIf="(products.length > 0)">
+     <h1>Votre panier</h1>
+     <div class="col-12">
+       <table class="table">
+         <thead>
+         <td>Article</td>
+         <td>Quantité</td>
+         <td>Prix</td>
+         </thead>
+         <tbody>
+         <tr *ngFor="let product of products">
+           <td>{{product.name}}</td>
+           <td>
+             <select name="quantity" id="quantity">
+             <option [value]="q" *ngFor="let q of quantity" [selected]="q === 1">{{q}}</option>
+           </select>
+           </td>
+           <td class="euro">{{product.price}}</td>
+         </tr>
+         </tbody>
+       </table>
+     </div>
+   </div>
+    <div class="row" *ngIf="products.length <= 0">
+      <div class="col-12">
+        <h1>Votre panier est vide !</h1>
+      </div>
+    </div>
+  </div>
+</div>

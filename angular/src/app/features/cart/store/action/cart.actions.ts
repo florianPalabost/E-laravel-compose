@@ -3,46 +3,46 @@ import {Update} from "@ngrx/entity";
 import {Product} from "../../../products/model/product";
 
 
-export const addProductToBasket = createAction(
-'[Basket] Add Product to cart',
+export const addProductToCart = createAction(
+'[Cart] Add Product to cart',
   props<{product: Product}>()
 );
 
-export const addProductToBasketSuccess = createAction(
-  '[Basket] Successfully added product to cart ',
+export const addProductToCartSuccess = createAction(
+  '[Cart] Successfully added product to cart ',
   props<{product: Product}>()
 );
 
 
-export const deleteProductFromBasket = createAction(
-  '[Basket] Delete Product from cart',
+export const deleteProductFromCart = createAction(
+  '[Cart] Delete Product from cart',
   props<{productId: string}>()
 );
 
-export const deleteProductFromBasketSuccess = createAction(
-  '[Basket] Delete Product from cart Successfully',
+export const deleteProductFromCartSuccess = createAction(
+  '[Cart] Delete Product from cart Successfully',
   props<{product: Product}>()
 );
 
 
 export const updateProduct = createAction(
-  '[Basket] Update Product',
+  '[Cart] Update Product',
   props<{product: Update<Product>}>()
 );
 export const updateProductSuccess = createAction(
-  '[Basket Effect] Updated Product Successfully',
+  '[Cart Effect] Updated Product Successfully',
 );
 export const updateProductFailed = createAction(
-  '[Basket Effect] Product updated Failed',
+  '[Cart Effect] Product updated Failed',
   props<{error: any}>()
 );
 
 
-export const basketActionTypes = {
-  addProductToBasket,
-  addProductToBasketSuccess,
-  deleteProductFromBasket,
-  deleteProductFromBasketSuccess,
+export const cartActionTypes = {
+  addProductToCart,
+  addProductToCartSuccess,
+  deleteProductFromCart,
+  deleteProductFromCartSuccess,
   updateProduct,
   updateProductSuccess,
   updateProductFailed

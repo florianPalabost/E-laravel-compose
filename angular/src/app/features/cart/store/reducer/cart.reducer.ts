@@ -1,11 +1,11 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import {createEntityAdapter, EntityAdapter, EntityState} from "@ngrx/entity";
-import {basketActionTypes} from "../action/basket.actions";
+import {cartActionTypes} from "../action/cart.actions";
 import {Product} from "../../../products/model/product";
 
-export const basketFeatureKey = 'basket';
+export const cartFeatureKey = 'cart';
 
-export interface BasketState extends EntityState<Product> {
+export interface CartState extends EntityState<Product> {
 }
 
 export const adapter: EntityAdapter<Product> = createEntityAdapter<Product>({
@@ -13,19 +13,18 @@ export const adapter: EntityAdapter<Product> = createEntityAdapter<Product>({
 });
 
 export const initialState = adapter.getInitialState({
-
 });
 
 
 export const cartReducer = createReducer(
   initialState,
-  on(basketActionTypes.addProductToBasket, (state, action) => {
+  on(cartActionTypes.addProductToCart, (state, action) => {
     return adapter.addOne(action.product, state);
   }),
-  on(basketActionTypes.deleteProductFromBasket, (state, action) => {
+  on(cartActionTypes.deleteProductFromCart, (state, action) => {
     return adapter.removeOne(action.productId, state);
   }),
-  on(basketActionTypes.updateProduct, (state, action) => {
+  on(cartActionTypes.updateProduct, (state, action) => {
     return adapter.updateOne(action.product, state);
   }),
 );

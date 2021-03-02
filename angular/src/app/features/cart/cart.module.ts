@@ -3,19 +3,19 @@ import { CommonModule } from '@angular/common';
 import { BasketFullComponent } from './components/basket-full/basket-full.component';
 import {StoreModule} from "@ngrx/store";
 import {EffectsModule} from "@ngrx/effects";
-import {BasketRoutingModule} from "./basket-routing.module";
-import {basketFeatureKey, basketReducer} from "./store/reducer/basket.reducer";
-import {BasketEffects} from "./store/effect/basket.effects";
-
+import {CartRoutingModule} from "./cart-routing.module";
+import {cartReducer} from "./store/reducer/cart.reducer";
+import {CartEffects} from "./store/effect/cart.effects";
+import {cartFeatureKey} from "./store/reducer/cart.reducer";
 
 
 @NgModule({
   declarations: [BasketFullComponent],
   imports: [
     CommonModule,
-    BasketRoutingModule,
-    StoreModule.forFeature(basketFeatureKey, basketReducer),
-    EffectsModule.forFeature([BasketEffects]),
+    CartRoutingModule,
+    StoreModule.forFeature(cartFeatureKey, cartReducer),
+    EffectsModule.forFeature([CartEffects]),
   ]
 })
-export class BasketModule { }
+export class CartModule { }

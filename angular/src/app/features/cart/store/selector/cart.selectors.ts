@@ -1,20 +1,17 @@
 import {createFeatureSelector, createSelector} from '@ngrx/store';
-import {basketFeatureKey, BasketState, selectAll, selectIds} from '../reducer/basket.reducer';
+import {cartFeatureKey, selectAll, selectIds, CartState} from '../reducer/cart.reducer';
 
-export const basketFeatureSelector = createFeatureSelector<BasketState>(basketFeatureKey);
+export const cartFeatureSelector = createFeatureSelector<CartState>(cartFeatureKey);
 
-export const getAllProducts = createSelector(
-  basketFeatureSelector,
-  selectAll
-);
 
-export const selectAllProducts = createSelector(
-  basketFeatureSelector,
+
+export const getAllProductsInCart = createSelector(
+  cartFeatureSelector,
   selectAll
 );
 
 export const selectOneProduct = ({productId}) => createSelector(
-  getAllProducts,
+  getAllProductsInCart,
   (products) => {
     if (productId === undefined) {
       return undefined;
